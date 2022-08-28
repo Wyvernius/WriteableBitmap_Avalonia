@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:cusomcontrol="using:Slidecrew_UI.CustomControls"
+        x:Class="Slidecrew_UI.MainWindow"
+        Title="Slidecrew_UI">
+  <StackPanel Background="White">
+    <Button Click="OnOpenWindowClick" >Click me to open new window!</Button>
+    <Button Click="OnChangeStyle" >Click me to change border style!</Button>
+    <Button Click="OnFullScreenToggle" >Click me to change window State!</Button>
+    <Button Click="OnColorResourceChanged" >Click me to change button background!</Button>
+    <TextBox Text="Hello World!"></TextBox>
+    <cusomcontrol:TimeBubble Time="17:00" BackgroundColor="{DynamicResource ResourceKey=TimeBubbleBackground}" ForegroundColor="{DynamicResource ResourceKey=TimeBubbleForeground}"/>
+	  <Grid ShowGridLines="True">
+		  <Grid.ColumnDefinitions>
+			  <ColumnDefinition Width="*"/>
+			  <ColumnDefinition Width="*"/>
+		  </Grid.ColumnDefinitions>
+		  <StackPanel>
+			  <Image Source="{Binding ImageBrush}" Height="300"/>
+			  <StackPanel Orientation="Horizontal">
+				  <ToggleSwitch OnContent="Secundary" OffContent="Primary" IsChecked="{Binding CapturePorS}"/>
+				  <Button Content="Start" Command="{Binding StartScreenShare}" Width="100"/>
+				  <Button Content="Stop" Command="{Binding StopScreenShare}" Width="100"/>
+			  </StackPanel>
+		  </StackPanel>
+		  <StackPanel Grid.Column="1">
+			  <Image x:Name="ScreenShareImage" Source="{Binding ScreenShareImage}" Height="300"/>
+			  <Button Content="Screenshot" Command="{Binding TakeScreenshot}" Width="100"/>
+		  </StackPanel>
+	  </Grid>
+	  <Border Height="60" DragDrop.AllowDrop="True" BorderBrush="Red" BorderThickness="4" Background="WhiteSmoke">
+		<TextBlock Text="Drag files in here"/>
+	  </Border>
+  </StackPanel>
+</Window>

@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:Slidecrew_UI.CustomControls"
+             x:Class="Slidecrew_UI.CustomControls.TimeBubble"
+             xmlns:converters="using:Slidecrew.ValueConverters" Background="Transparent"
+			 mc:ignorable="d">
+  <UserControl.Resources>
+    <converters:HourToXYConverter x:Key="HourToXY"></converters:HourToXYConverter>
+    <converters:MinuteToXYConverter x:Key="MinuteToXY"></converters:MinuteToXYConverter>
+  </UserControl.Resources>
+  <Grid Background="Transparent" MaxWidth="90">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition MinWidth="100"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition MinHeight="30"/>
+    </Grid.RowDefinitions>
+    <Border CornerRadius="15" Background="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=BackgroundColor}">
+      <DockPanel>
+        <Canvas Width="22"
+                Height="22"
+                Margin="5,0,10,0"
+                DockPanel.Dock="Left" Background="Transparent">
+          <Ellipse x:Name="Clock_Outer"
+                   StrokeThickness="2"
+                   Stroke="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ForegroundColor}"
+                   Width="22"
+                   Height="22"/>
+          <Line x:Name="HourArm" StartPoint="11,11" 
+                EndPoint="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Time, Converter={StaticResource HourToXY}}" 
+                Stroke="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ForegroundColor}"
+                StrokeThickness="2"/>
+          <Line x:Name="MinuteArm" StartPoint="11,11"
+                EndPoint="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Time, Converter={StaticResource MinuteToXY}}"
+                Stroke="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ForegroundColor}"
+                StrokeThickness="2"/>
+        </Canvas>
+        <TextBlock x:Name="TimeTxt" DockPanel.Dock="Right" Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Time}"
+                   Foreground="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ForegroundColor}"
+                   FontSize="22"
+                   Margin="0,3,0,0"/>
+      </DockPanel>
+    </Border>
+  </Grid>
+</UserControl>

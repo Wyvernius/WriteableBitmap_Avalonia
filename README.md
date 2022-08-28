@@ -1,1 +1,1 @@
-# WriteableBitmap_Avalonia
+# Minimal example for debugging WriteableBitmap in the avalonia framework.
